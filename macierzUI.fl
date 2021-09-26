@@ -1,0 +1,103 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0105 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <cstdio>} {} 
+
+decl {\#include "macierze.h"} {public
+} 
+
+class macierzUI {open : {public Fl_Group}
+} {
+  decl {unsigned numer;} {public
+  }
+  Function {macierzUI(int x, int y, int w, int h, const char *label = 0) : Fl_Group(x, y, w, h, label)} {open
+  } {
+    Fl_Window {} {open
+      xywh {706 214 300 213} type Double visible
+    } {
+      Fl_Group {} {open
+        xywh {48 47 210 71} box THIN_DOWN_FRAME
+      } {
+        Fl_Box {} {
+          label {u(x,y)=}
+          private xywh {48 52 51 18} labelsize 10 align 20
+        }
+        Fl_Value_Input a {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {93 51 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Box {} {
+          label {x+}
+          private xywh {132 50 24 21} labelsize 10 align 20
+        }
+        Fl_Value_Input b {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {151 51 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Box {} {
+          label {y+}
+          private xywh {192 50 24 21} labelsize 10 align 20
+        }
+        Fl_Value_Input c {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {210 51 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Box {} {
+          label {v(x,y)=}
+          private xywh {48 76 51 18} labelsize 10 align 20
+        }
+        Fl_Value_Input d {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {93 76 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Box {} {
+          label {x+}
+          private xywh {132 76 24 19} labelsize 10 align 20
+        }
+        Fl_Value_Input e {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {151 76 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Box {} {
+          label {y+}
+          private xywh {192 76 24 19} labelsize 10 align 20
+        }
+        Fl_Value_Input f {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          xywh {210 76 42 20} labelsize 10 minimum -100 maximum 100 step 0.05 textsize 10
+        }
+        Fl_Slider P {
+          user_data this
+          callback {((macierzUI*)v)->do_callback();}
+          tooltip Prawdopodobienstwo xywh {54 101 198 12} type {Horz Fill} selection_color 89 align 20 maximum 100 step 1 value 20
+        }
+      }
+    }
+    code {numer = macierzUI::ostatni++;} {}
+  }
+  decl {static unsigned ostatni;} {selected
+  }
+  Function {Resetuj()} {open
+  } {
+    code {Ustaw(Macierz());} {}
+  }
+  Function {Ustaw(const Macierz &M)} {open
+  } {
+    code {a->value(M.a);
+b->value(M.b);
+c->value(M.c);
+d->value(M.d);
+e->value(M.e);
+f->value(M.f);} {}
+  }
+} 
+
+decl {unsigned macierzUI::ostatni = 0;} {public
+} 

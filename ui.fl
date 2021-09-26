@@ -1,0 +1,929 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0105 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include "app.h"} {public
+} 
+
+decl {\#include "macierzUI.h"} {public
+} 
+
+decl {\#include "macierze.h"} {public
+} 
+
+decl {\#include "przekUI.h"} {public
+} 
+
+decl {\#include "obraz.h"} {public
+} 
+
+decl {\#include "plik.h"} {public
+} 
+
+decl {\#include "kolory.h"} {public
+} 
+
+decl {\#include <Fl/Fl_Image.H>} {public
+} 
+
+decl {\#include <FL/Fl_BMP_Image.H>} {public
+} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {public
+} 
+
+decl {\#include <FL/Fl_Color_Chooser.H>} {public
+} 
+
+decl {\#include <FL/fl_ask.H>} {public
+} 
+
+decl {\#include <cstdlib>} {public
+} 
+
+decl {\#include <cstdio>} {public
+} 
+
+decl {\#include <cmath>} {public
+} 
+
+decl {\#include <cstring>} {public
+} 
+
+decl {\#include <ctime>} {public
+} 
+
+decl {\#include <clocale>} {public
+} 
+
+decl {Fl_Font PL_Font;} {public
+} 
+
+decl {App *MyApp;} {public
+} 
+
+class UserInterface {open
+} {
+  Function {UserInterface()} {open
+  } {
+    Fl_Window okno1 {
+      label {Iterated Functions System        Robert Nowotniak <robercik@stud.ics.p.lodz.pl>} open
+      xywh {241 133 800 600} type Double visible
+    } {
+      Fl_Group {} {
+        label Panel open
+        xywh {575 0 225 786} box DOWN_FRAME
+      } {
+        Fl_Value_Slider ilosc {
+          callback {int ile = int(o->value());
+MyApp->ilosc_soczewek(ile);
+
+for (unsigned int n = 0; n < sizeof(macierz) / sizeof(*macierz); n++)
+   if(n < o->value()) {
+      przek[n]->show();
+      macierz[n]->show();
+   } else {
+      przek[n]->hide();
+      macierz[n]->hide();
+   }
+
+if (Macierze->h() >= (macierz[0]->h() + 1) * ile) {
+   Macierze->position(0, 0);
+   Macierze->type(0);
+   Przeksztalcenia->position(0, 0);
+   Przeksztalcenia->type(0);
+} else {
+   Macierze->type(Fl_Scroll::VERTICAL);
+   Przeksztalcenia->type(Fl_Scroll::VERTICAL);
+}
+
+
+Macierze->redraw();
+Przeksztalcenia->redraw();
+
+return;}
+          xywh {581 25 213 25} type Horizontal minimum 1 maximum 10 step 1 value 3
+        }
+        Fl_Tabs {} {open
+          xywh {575 55 225 545}
+        } {
+          Fl_Scroll Macierze {
+            label Macierze
+            xywh {575 75 225 524} type VERTICAL labelsize 10 hide
+            code0 {o->labelfont(PL_Font);}
+          } {
+            Fl_Group {macierz[0]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 77 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[1]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();}
+              xywh {578 148 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[2]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 219 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[3]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();}
+              xywh {578 290 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[4]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();}
+              xywh {578 361 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[5]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 432 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[6]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 503 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[7]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 574 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[8]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 645 210 70}
+              class macierzUI
+            } {}
+            Fl_Group {macierz[9]} {
+              callback {macierzUI *tmp = (macierzUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->a->value(),
+   tmp->b->value(),
+   tmp->c->value(),
+   tmp->d->value(),
+   tmp->e->value(),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+przek[nr]->P->value(tmp->P->value());
+przek[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 716 210 70}
+              class macierzUI
+            } {}
+          }
+          Fl_Scroll Przeksztalcenia {
+            label {Przekszta³cenia}
+            xywh {575 75 225 524} type VERTICAL labelsize 10 hide
+            code0 {o->labelfont(PL_Font);}
+          } {
+            Fl_Group {przek[0]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 77 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[1]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 148 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[2]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 219 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[3]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 290 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[4]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 361 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[5]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 432 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[6]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 503 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[7]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 574 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[8]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 645 213 70}
+              class przekUI
+            } {}
+            Fl_Group {przek[9]} {
+              callback {przekUI *tmp = (przekUI*)o;
+unsigned nr = tmp->numer;
+
+MyApp->TABELA[nr] = Macierz(
+   tmp->r->value() * cos(PI * tmp->fi->value() / 180.0),
+  -tmp->s->value() * sin(PI * tmp->theta->value() / 180.0),
+   tmp->c->value(),
+   tmp->r->value() * sin(PI * tmp->fi->value() / 180.0),
+   tmp->s->value() * cos(PI * tmp->theta->value() / 180.0),
+   tmp->f->value()
+);
+
+MyApp->TABELA[nr].prawd = tmp->P->value();
+macierz[nr]->P->value(tmp->P->value());
+macierz[nr]->Ustaw(MyApp->TABELA[nr]);
+MyApp->aktualna = nr;
+
+Widok->redraw();} open
+              xywh {578 716 213 70}
+              class przekUI
+            } {}
+          }
+          Fl_Group opcje {
+            label Opcje open
+            xywh {575 75 225 524} labelsize 10
+            code0 {o->labelfont(PL_Font);}
+          } {
+            Fl_Input nazwa {
+              label {Nazwa uk³adu soczewek:}
+              callback {MyApp->nazwa(o->value());
+Widok->label(o->value());
+Widok->redraw();}
+              xywh {585 104 205 22} labelfont 4 align 5
+              code0 {o->labelfont(PL_Font);}
+              code1 {o->textfont(PL_Font);}
+            }
+            Fl_Check_Button siatka {
+              label {Pokazuj siatkê}
+              callback {MyApp->opcje.siatka = o->value();
+Widok->redraw();}
+              xywh {585 130 205 22} down_box DOWN_BOX labelfont 4
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Check_Button osie {
+              label {Pokazuj osie}
+              callback {MyApp->opcje.osie = o->value();
+Widok->redraw();}
+              xywh {585 153 205 22} down_box DOWN_BOX labelfont 4
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Check_Button soczewki {
+              label {Pokazuj soczewki}
+              callback {MyApp->opcje.soczewki = o->value();
+Widok->redraw();}
+              xywh {585 176 205 22} down_box DOWN_BOX labelfont 4
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Group {} {
+              label {Tryb dzia³ania:} open
+              private xywh {579 222 217 107} box ENGRAVED_FRAME
+              code0 {o->labelfont(PL_Font);}
+            } {
+              Fl_Round_Button ruletka {
+                label {Sprzê¿enie z ruletk±}
+                callback {MyApp->opcje.tryb = App::RULETKA;
+punkty->activate();
+kroki->deactivate();
+plik_obrazek->deactivate();
+wybierz_obrazek->deactivate();}
+                xywh {583 229 203 21} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Round_Button klasyczny {
+                label {Model klasyczny}
+                callback {MyApp->opcje.tryb = App::KLASYCZNY;
+kroki->activate();
+punkty->deactivate();
+plik_obrazek->deactivate();
+wybierz_obrazek->deactivate();}
+                xywh {583 250 203 21} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Round_Button z_obrazem {
+                label {Obraz wej¶ciowy:}
+                callback {MyApp->opcje.tryb = App::TRYB_Z_OBRAZEM;
+kroki->activate();
+punkty->deactivate();
+plik_obrazek->activate();
+wybierz_obrazek->activate();}
+                xywh {583 272 203 21} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Button wybierz_obrazek {
+                label {...}
+                callback {Fl_File_Chooser fc(".",
+		"Bitmapy (*.bmp)",
+		Fl_File_Chooser::CREATE,
+		"Wybierz plik bitmapy");
+fc.show();
+
+while (fc.visible())
+	Fl::wait();
+
+if (fc.count() == 1) {
+   Fl_BMP_Image OB(fc.value());
+   if(OB.d() != 3) {
+      fl_alert("Mo¿na u¿ywaæ bitmat tylko z 24-bitow± g³êbi± kolorów.\\n");
+      return;
+   }
+
+   if(!OB.alloc_array) {
+      fl_alert("B³±d przy wczytywaniu bitmapy.");
+      return;
+   }
+
+   plik_obrazek->value(rindex(fc.value(), '/') + 1);
+   MyApp->plik_wejsciowy(fc.value());
+   
+}}
+                xywh {764 295 25 25} labelfont 1 align 16
+              }
+              Fl_Output plik_obrazek {
+                xywh {598 295 165 25}
+              }
+            }
+            Fl_Value_Input punkty {
+              label {Liczba punktów:}
+              callback {if (o->value() <= 0) {
+   fl_alert("Warto¶æ musi byæ dodatnia.");
+   return;
+}
+MyApp->opcje.punkty = (long unsigned)(o->value());}
+              xywh {718 338 77 22} labelfont 4 when 4 maximum 1e+06 step 1000 value 500000 textfont 4
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Value_Input kroki {
+              label {Ilo¶æ kroków:}
+              callback {if (o->value() <= 0) {
+   fl_alert("Warto¶æ musi byæ dodatnia.");
+   return;
+}
+MyApp->opcje.kroki = (unsigned int)(o->value());}
+              xywh {718 364 77 22} when 4 minimum 1 maximum 20 step 1
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Value_Input panx {
+              label {Przesuniêcie:}
+              callback {MyApp->opcje.panx = o->value();
+Widok->image(0);
+Widok->redraw();}
+              xywh {711 393 36 25} minimum -10 maximum 10 step 0.1
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Value_Input pany {
+              label {,}
+              callback {MyApp->opcje.pany = o->value();
+Widok->image(0);
+Widok->redraw();}
+              xywh {759 393 36 25} minimum -10 maximum 10 step 0.1
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Value_Input zoom {
+              label {Skala:}
+              callback {if (o->value() <= 0) {
+   fl_alert("Warto¶æ musi byæ dodatnia.");
+   return;
+}
+
+MyApp->opcje.zoom = o->value();
+Widok->image(0);
+Widok->redraw();}
+              xywh {718 424 77 25} minimum 0.05 maximum 10 step 0.05 value 0.6
+              code0 {o->labelfont(PL_Font);}
+            }
+            Fl_Group {} {
+              label {Kolory:} open
+              private xywh {579 471 217 127} box ENGRAVED_FRAME
+              code0 {o->labelfont(PL_Font);}
+            } {
+              Fl_Round_Button kolor_tryb1 {
+                label {Jednolita barwa}
+                callback {MyApp->opcje.tryb_koloru = 0;}
+                xywh {583 477 205 22} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Round_Button kolor_tryb2 {
+                label {Soczewka docelowa}
+                callback {MyApp->opcje.tryb_koloru = 1;}
+                xywh {583 498 205 22} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Round_Button kolor_tryb3 {
+                label {Soczewka ¼ród³owa}
+                callback {MyApp->opcje.tryb_koloru = 2;}
+                xywh {583 519 205 22} type Radio down_box ROUND_DOWN_BOX
+                code0 {o->labelfont(PL_Font);}
+              }
+              Fl_Slider kolor_nr {
+                label 1
+                callback {// XXX maxvalue powinno byc ustawione na MAXSOCZEWEK
+static char buf[3];
+
+kolor->color(kolor_Soczewki[int(o->value()) - 1]);
+kolor->redraw();
+snprintf(buf, 3, "%d", int(o->value()));
+kolor_nr->label(buf);
+MyApp->aktualny_kolor = int(o->value()) - 1;}
+                tooltip {Numer soczewki} xywh {583 564 168 28} type Horizontal align 16 minimum 1 maximum 10 step 1 value 1
+              }
+              Fl_Button kolor {
+                callback {unsigned char R, G, B;
+
+unsigned nr = unsigned(kolor_nr->value()) - 1;
+
+Fl::get_color(kolor_Soczewki[nr], R, G, B);
+if (!fl_color_chooser("Wybierz kolor:", R, G, B))
+   return;
+
+Fl::set_color(kolor_Soczewki[nr], R, G, B);
+o->color(kolor_Soczewki[nr]);}
+                tooltip {Zmieñ kolor} xywh {755 564 35 28} box BORDER_BOX
+              }
+            }
+          }
+        }
+      }
+      Fl_Box Widok {
+        label {Nazwa fraktala} selected
+        xywh {0 0 575 570} color 0 selection_color 2 labelfont 4 labelcolor 95 align 21
+        code0 {o->labelfont(PL_Font);}
+        class Obraz
+      }
+      Fl_Group belka {
+        private xywh {0 570 575 30} box THIN_UP_FRAME labelsize 10
+      } {
+        Fl_Button {} {
+          label {&URUCHOM}
+          callback {if (MyApp->opcje.tryb == App::RULETKA) {
+   unsigned char *fraktal = MyApp->Tryb_Ruletka(Widok->w(), Widok->h());
+   if (fraktal) {
+      Fl_RGB_Image *bmp = new Fl_RGB_Image(fraktal, Widok->w(), Widok->h(), 4);
+      Widok->image(bmp);
+   }
+} else if (MyApp->opcje.tryb == App::TRYB_Z_OBRAZEM) {
+   unsigned char *fraktal = MyApp->Tryb_Z_Obrazem(Widok->w(), Widok->h());
+   if (fraktal) {
+      Fl_RGB_Image *bmp = new Fl_RGB_Image(fraktal, Widok->w(), Widok->h(), 4);
+      Widok->image(bmp);
+   }
+} else if (MyApp->opcje.tryb == App::KLASYCZNY)
+   Widok->rysuj_klas = true;
+
+Widok->redraw();}
+          xywh {3 572 87 24} labeltype ENGRAVED_LABEL labelsize 13
+          code0 {o->labelfont(PL_Font);}
+        }
+        Fl_Button Reset {
+          label {&Resetuj}
+          callback {MyApp->ilosc_soczewek(4);
+MyApp->nazwa(0);
+MyApp->opcje.siatka = true;
+MyApp->opcje.osie = true;
+MyApp->opcje.soczewki = true;
+MyApp->opcje.punkty = 300000;
+MyApp->opcje.zoom = 0.6;
+MyApp->opcje.panx = 0;
+MyApp->opcje.pany = 0;
+MyApp->opcje.tryb_koloru = 0;
+
+Widok->image(0);
+
+for (unsigned int n = 0; n < sizeof(MyApp->TABELA) / sizeof(*(MyApp->TABELA)); n++) {
+   MyApp->TABELA[n] = Macierz();
+   MyApp->TABELA[n].prawd = 100.0 / ilosc->value();
+}
+
+Flush();}
+          xywh {93 572 87 24} labelfont 4
+          code0 {o->labelfont(PL_Font);}
+        }
+        Fl_Button {} {
+          label {&Wczytaj}
+          callback {if (Wczytaj_Plik() == 0) {
+   Widok->image(0);
+   Flush();
+}}
+          xywh {283 572 87 24} labelfont 4
+          code0 {o->labelfont(PL_Font);}
+        }
+        Fl_Button {} {
+          label {&Zapisz}
+          callback {Zapisz_Plik();}
+          xywh {379 572 87 24} labelfont 4
+          code0 {o->labelfont(PL_Font);}
+        }
+        Fl_Button {} {
+          label {&Koniec}
+          callback {exit(0);}
+          xywh {482 572 87 24} labelfont 4
+          code0 {o->labelfont(PL_Font);}
+        }
+      }
+    }
+    code {Reset->do_callback();
+okno1->show();
+
+return;} {}
+  }
+  Function {Flush()} {open
+  } {
+    code {// Odswiezenie wyswietlanych wartosci,
+// by byly zgodne z danymi w aplikacji
+
+ilosc->value(MyApp->ilosc_soczewek());
+
+siatka->value(MyApp->opcje.siatka);
+osie->value(MyApp->opcje.osie);
+punkty->value(MyApp->opcje.punkty);
+soczewki->value(MyApp->opcje.soczewki);
+nazwa->value(MyApp->nazwa());
+kroki->value(MyApp->opcje.kroki);
+zoom->value(MyApp->opcje.zoom);
+panx->value(MyApp->opcje.panx);
+pany->value(MyApp->opcje.pany);
+
+if (MyApp->opcje.tryb == App::KLASYCZNY) {
+   klasyczny->value(true);
+   kroki->activate();
+   punkty->deactivate();
+   plik_obrazek->deactivate();
+   wybierz_obrazek->deactivate();
+} else if (MyApp->opcje.tryb == App::RULETKA) {
+   ruletka->value(true);
+   punkty->activate();
+   kroki->deactivate();
+   plik_obrazek->deactivate();
+   wybierz_obrazek->deactivate();
+}
+
+
+if (MyApp->opcje.tryb_koloru == 0) {
+   kolor_tryb1->value(true);
+   kolor_tryb2->value(false);
+   kolor_tryb3->value(false);
+} 
+else if (MyApp->opcje.tryb_koloru == 1) {
+   kolor_tryb1->value(false);
+   kolor_tryb2->value(true);
+   kolor_tryb3->value(false);
+} 
+else if (MyApp->opcje.tryb_koloru == 2) {
+   kolor_tryb1->value(false);
+   kolor_tryb2->value(false);
+   kolor_tryb3->value(true);
+} 
+
+kolor->color(kolor_Soczewki[0]);
+
+
+for (unsigned int n = 0; n < sizeof(macierz) / sizeof(*macierz); n++) {
+   macierz[n]->Ustaw(MyApp->TABELA[n]);
+   przek[n]->Ustaw(MyApp->TABELA[n]);
+   macierz[n]->P->value(MyApp->TABELA[n].prawd);
+   przek[n]->P->value(MyApp->TABELA[n].prawd);
+}
+
+ilosc->do_callback();
+Widok->redraw();} {}
+  }
+} 
+
+Function {} {open
+} {
+  code {srand(time(0));} {}
+  code {setlocale(LC_ALL, "");
+setlocale(LC_NUMERIC, "C");} {}
+  code {PL_Font = FL_FREE_FONT;
+const char *font = "-*-verdana-*-r-*-*-*-*-*-*-*-*-iso8859-2";
+
+Fl::set_fonts(font);
+Fl::set_font(PL_Font, font);
+fl_message_font(PL_Font, 14);
+
+// XXX Dodaæ ifdefy w zale¿no¶ci od systemu} {}
+  code {fclose(stdin);
+fclose(stdout);
+fclose(stderr);} {}
+  code {MyApp = new App();} {}
+  code {UserInterface();} {}
+} 

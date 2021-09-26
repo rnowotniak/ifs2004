@@ -1,0 +1,136 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0105 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <cmath>} {public
+} 
+
+decl {\#include <cerrno>} {public
+} 
+
+decl {\#include <cmath>} {public
+} 
+
+decl {\#include "macierze.h"} {public
+} 
+
+decl {\#include "app.h"} {public
+} 
+
+class przekUI {open : {public Fl_Group}
+} {
+  decl {unsigned numer;} {public
+  }
+  Function {przekUI(int x, int y, int w, int h, const char *label = 0) : Fl_Group(x, y, w, h, label)} {} {
+    Fl_Window {} {open
+      xywh {937 209 300 213} type Double visible
+    } {
+      Fl_Group {} {open
+        xywh {48 47 210 70} box THIN_DOWN_FRAME
+      } {
+        Fl_Slider P {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          tooltip Prawdopodobienstwo xywh {54 100 198 12} type {Horz Fill} selection_color 89 align 20 maximum 100 step 1 value 20
+        }
+        Fl_Box {} {
+          label Translacje
+          private xywh {51 49 66 14} labelsize 10
+        }
+        Fl_Box {} {
+          label Obroty
+          private xywh {115 49 66 14} labelsize 10
+        }
+        Fl_Box {} {
+          label Skalowania
+          private xywh {190 49 66 14} labelsize 10
+        }
+        Fl_Box {} {
+          label x
+          private xywh {58 62 16 13} labelsize 10
+        }
+        Fl_Box {} {
+          label y
+          private xywh {93 62 16 13} labelsize 10
+        }
+        Fl_Box {} {
+          label q
+          private xywh {126 62 16 13} labelfont 12 labelsize 10
+        }
+        Fl_Box {} {
+          label f
+          private xywh {160 62 16 13} labelfont 12 labelsize 10
+        }
+        Fl_Box {} {
+          label r
+          private xywh {202 62 16 13} labelsize 10
+        }
+        Fl_Box {} {
+          label s
+          private xywh {232 62 16 13} labelsize 10
+        }
+        Fl_Value_Input c {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {51 76 31 20} labelsize 10 minimum -100 maximum 100 step 0.01 textsize 10
+        }
+        Fl_Value_Input f {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {87 76 31 20} labelsize 10 minimum -100 maximum 100 step 0.01 textsize 10
+        }
+        Fl_Value_Input theta {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {121 76 31 20} labelsize 10 minimum -360 maximum 360 step 1 textsize 10
+        }
+        Fl_Value_Input fi {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {153 76 31 20} labelsize 10 minimum -360 maximum 360 step 1 textsize 10
+        }
+        Fl_Value_Input r {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {192 76 31 20} labelsize 10 minimum -10 maximum 10 step 0.1 value 1 textsize 10
+        }
+        Fl_Value_Input s {
+          user_data this
+          callback {((przekUI*)v)->do_callback();}
+          xywh {226 76 31 20} labelsize 10 minimum -10 maximum 10 step 0.1 value 1 textsize 10
+        }
+      }
+    }
+    code {numer = przekUI::ostatni++;} {}
+  }
+  decl {static unsigned ostatni;} {}
+  Function {Resetuj()} {open
+  } {
+    code {Ustaw(Macierz());} {}
+  }
+  Function {Ustaw(const Macierz &M)} {open
+  } {
+    code {float x;
+
+c->value(M.c);
+f->value(M.f);
+
+if (M.a == 0 && M.d == 0)
+   x = 0;
+else if ((x = (M.d<0?-1.0:1.0) * 180.0 * acos(M.a / hypot(M.a, M.d)) / PI) == EDOM)
+   x = 0;
+fi->value(x);
+
+if (M.b == 0 && M.e == 0)
+   x = 0;
+else if ((x = (M.b>0?-1.0:1.0) * 180.0 * acos(M.e / hypot(M.b, M.e)) / PI) == EDOM)
+   x = 0;
+theta->value(x);
+
+r->value(hypot(M.a, M.d));
+s->value(hypot(M.b, M.e));} {}
+  }
+} 
+
+decl {unsigned przekUI::ostatni = 0;} {public
+} 

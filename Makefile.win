@@ -1,0 +1,44 @@
+# Project: Projekt1
+# Makefile created by Dev-C++ 4.9.8.7
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = macierzUI.o obraz.o plik.o przekUI.o ui.o app.o $(RES)
+LINKOBJ  = macierzUI.o obraz.o plik.o przekUI.o ui.o app.o $(RES)
+LIBS =  -L"C:/ROB/DEV-CPP/lib" -lgdi32 -lfltk -lm -lole32 -luuid -lcomctl32 -lwsock32 -mwindows -lfltk -lfltk_images -lole32 -luuid -lcomctl32 -lwsock32 -lm -static 
+INCS =  -I"C:/ROB/DEV-CPP/include" 
+CXXINCS =  -I"C:/ROB/DEV-CPP/include/c++"  -I"C:/ROB/DEV-CPP/include/c++/mingw32"  -I"C:/ROB/DEV-CPP/include/c++/backward"  -I"C:/ROB/DEV-CPP/include" 
+BIN  = ifs.exe
+CXXFLAGS = $(CXXINCS)  -mwindows -g
+CFLAGS = $(INCS)-DWIN32 -mms-bitfields   -mwindows -g
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before ifs.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "ifs.exe" $(LIBS)
+
+macierzUI.o: macierzUI.cxx
+	$(CPP) -c macierzUI.cxx -o macierzUI.o $(CXXFLAGS)
+
+obraz.o: obraz.cxx
+	$(CPP) -c obraz.cxx -o obraz.o $(CXXFLAGS)
+
+plik.o: plik.cxx
+	$(CPP) -c plik.cxx -o plik.o $(CXXFLAGS)
+
+przekUI.o: przekUI.cxx
+	$(CPP) -c przekUI.cxx -o przekUI.o $(CXXFLAGS)
+
+ui.o: ui.cxx
+	$(CPP) -c ui.cxx -o ui.o $(CXXFLAGS)
+
+app.o: app.cxx
+	$(CPP) -c app.cxx -o app.o $(CXXFLAGS)
